@@ -6,28 +6,88 @@
 using namespace std;
 int main()
 {
-	
+	//traverseLinkedList();
 }
-
-struct List
+struct Node 
 {
-    int inf;
-    List* link;
+	int data;
+	Node* next;
+	Node(int date)
+	{
+		this->data = data;
+		this->next = nullptr;
+	}
 };
+void traverseLinkedList(Node* head) 
+{
+	Node* current = head;
 
-void addNode(List*& Head, List*& Tail) 
-{
-List* p = new List;
-cout << "Enter value";
-cin >> p->inf;
-p->link = NULL;
-if (Head == NULL)
-{
-	Head = p;
-	Tail = p;
+	while (current != nullptr) 
+	{
+		cout << current->data << " ";
+		current = current->next;
+	}
+	cout << std::endl;
 }
-else
+
+Node* insertAtBeginning(Node* head, int value)//додавання елементу до голови списку
 {
-	Tail->link = p;
-	Tail = p;
+	Node* newNode = new Node(value);
+	newNode->next = head;
+	head = newNode;
+	return head;
+}
+
+Node* insertAtEnd(Node* head, int value) //додаванняелементу до хвоста списку
+{
+	Node* newNode = new Node(value);
+	if (head == nullptr) 
+	{
+		return newNode;
+	}
+	Node* current = head;
+	while (current->next !=nullptr)
+	{
+		current = current->next;
+		return head;
+	}
+	
+
+}
+
+Node* deleteAtPosition(Node* head, int position)
+{
+	if (head == nullptr || position < 1)
+	{
+		return head;
+	}
+	
+	if (position == 1 )
+	{
+		Node* temp = head;
+		head = head->next;
+		delete temp;
+		return head;
+
+		Node* current = head;
+		for (int i = 1; i < position - 1 && current != nullptr; i++) 
+		{
+			current = current->next;
+		}
+		if (current==NULL || current-> next == nullptr)
+		{
+			return;
+		}
+
+	}
+}
+
+Node* removeFirstNode(Node* head) //видалення першого елементу в списку
+{
+	if (head == nullptr)
+		return nullptr;
+	Node* temp = head;
+	head = head->next;
+	delete temp;
+	return head;
 }
